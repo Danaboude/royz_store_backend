@@ -1,0 +1,9 @@
+{
+  "outOfStock": "غير متوفر",
+  "inStock": "متوفر",
+  "product": {
+    "details": "تفاصيل المنتج",
+    "description": "وصف المنتج"
+  },
+  "admin.assigned": "مُعيّن"
+} 

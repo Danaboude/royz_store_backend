@@ -1,0 +1,50 @@
+config:
+  # The target URL for your API. Replace with your production URL.
+  target: "http://localhost:5000/api"
+  phases:
+    - duration: 60  # seconds
+      arrivalRate: 5 # new virtual users per second
+      name: "Warm-up phase"
+    - duration: 120
+      arrivalRate: 5
+      rampTo: 50 # ramp up to 50 new users per second
+      name: "Ramp-up phase"
+    - duration: 300
+      arrivalRate: 50
+      name: "Sustained load phase"
+  # Define payload data if needed, e.g., for login testing
+  # payload:
+  #   path: "users.csv"
+  #   fields:
+  #     - "username"
+  #     - "password"
+
+scenarios:
+  - name: "Authenticated User Flows"
+    flow:
+      # Note: For a real test, you'd need a login step to get a token.
+      # This example assumes a valid token is hardcoded.
+      # It's better to have a login flow that saves the token.
+      - post:
+          url: "/auth/signin"
+          json:
+            email: "admin@example.com" # Use a test user
+            password: "password"
+          capture:
+            - json: "$.token"
+              as: "authToken"
+      
+      - get:
+          url: "/statistics/dashboard"
+          headers:
+            Authorization: "Bearer {{ authToken }}"
+
+      - get:
+          url: "/products"
+          headers:
+            Authorization: "Bearer {{ authToken }}"
+            
+      - get:
+          url: "/categories"
+          headers:
+            Authorization: "Bearer {{ authToken }}" 

@@ -1,0 +1,9 @@
+{
+  "outOfStock": "Out of Stock",
+  "inStock": "In Stock",
+  "product": {
+    "details": "Product Details",
+    "description": "Product Description"
+  },
+  "admin.assigned": "Assigned"
+} 
